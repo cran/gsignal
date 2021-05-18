@@ -1,3 +1,21 @@
+# gsignal 0.3-2
+
+- date: 20210518
+- corrected CRAN WARNINGs on ATLAS, MKL, valgrind, fedora, solaris
+- corrected import NOTE for grDevices
+- adapted code in vignette "gsignal"
+- use explicit tolerance in testthat tests
+- added badges and logo (just for the fun of it)
+- sort zeros and poles on output in sos2zp(), tf2zp()
+- use matrix() instead of as.matrix() in functions
+    dct(), idct(), czt(), dst(), idst(), fht(), ifht()
+- minor bugfix in arburg()
+- bugfix in filter.cpp: resize a and b vectors, length of zi
+- adapted some examples
+
+
+---
+
 # gsignal 0.3-1
 
 - date: 20210502
@@ -36,7 +54,7 @@
 - date: 20201218
 - completed documentation
 - adapted examples and links
-- licence changed to GPL3 in accordance with Octave signal package licence
+- license changed to GPL-3 in accordance with Octave signal package license
 
 ---
 
