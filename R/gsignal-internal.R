@@ -22,6 +22,7 @@
 # 20200507  GvB       adapted isWhole()
 # 20200709  GvB       normalized sinc function
 # 20200820  GvB       added strReverse() function
+# 20211031  GvB       added isConjSymm() function
 #------------------------------------------------------------------------------
 
 #' Internal functions not exported to the namespace
@@ -37,7 +38,7 @@ isScalar <- function(x)
 isPosscal <- function(x) isScalar(x) && is.numeric(x) && x >= 0
 
 # test if x is a whole number
-isWhole <- function(x, tol = .Machine$double.eps^0.5)
+isWhole <- function(x, tol = .Machine$double.eps * 5)
   !(is.null(x) || is.character(x)) && any(abs(x - round(x)) < tol)
 
 # convert factor to numeric
@@ -62,7 +63,7 @@ nextpow2 <- function(x) 2^ceiling(log2(x))
 # convert complex number to real if imaginary part is zero
 # zapIm <- function(x, nd = 10) if (all(Im(z <- zapsmall(x, nd)) == 0))
 #   Re(z) else x
-zapIm <- function(x, tol = .Machine$double.eps^0.5) {
+zapIm <- function(x, tol = .Machine$double.eps * 5) {
   z <- all(abs(Im(x)) < tol) 
   if (!is.na(z) && z) 
     Re(x)
@@ -80,3 +81,19 @@ dec2bin <- function(x) paste(as.integer(rev(intToBits(x))), collapse = "")
 
 # convert binary string to decimal
 bin2dec <- function(x) strtoi(x, 2)
+
+# test if vector is conjugate symmetrical
+# length of x assumed to be > 1
+isConjSymm <- function(x) {
+  if (!is.vector(x) || is.character(x)) rv <- FALSE
+  l <- length(x)
+  if (l <= 0) {
+    rv <- FALSE
+  } else if (l == 1) {
+    rv <- TRUE
+  } else { 
+    rv <- isTRUE(all.equal(Conj(x[c(1, seq(length(x), 2, -1))]), x,
+                           tolerance = 10 * .Machine$double.eps))
+  }
+  rv
+}

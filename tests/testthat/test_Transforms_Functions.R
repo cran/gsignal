@@ -224,11 +224,11 @@ test_that("dct() and idct() tests are correct", {
   # even-length series
   x <- c(1, 2, 4, 1, 2, 3, 5, 2, 3, 5, 6, 7, 8, 4, 3, 6, 3, 2, 5, 1)
   expect_equal(x, idct(dct(x)))
-  expect_equal(unname(cbind(x, x)), idct(dct(cbind(x, x))))
+  expect_equal(cbind(x, x), idct(dct(cbind(x, x))))
   #uneven-length series
   x <- c(1, 2, 4, 1, 2, 3, 5, 2, 3, 5, 6, 7, 8, 4, 3, 6, 3, 2, 5)
   expect_equal(x, idct(dct(x)))
-  expect_equal(unname(cbind(x, x)), idct(dct(unname(cbind(x, x)))))
+  expect_equal(cbind(x, x), idct(dct(cbind(x, x))))
   
 })
 
@@ -251,10 +251,10 @@ test_that("parameters to dct2() and idct2() are correct", {
 test_that("dct2() and idct2() tests are correct", {
   # even-length series
   x <- c(1, 2, 4, 1, 2, 3, 5, 2, 3, 5, 6, 7, 8, 4, 3, 6, 3, 2, 5, 1)
-  expect_equal(unname(cbind(x, x)), idct2(dct2(cbind(x, x))))
+  expect_equal(cbind(x, x), idct2(dct2(cbind(x, x))))
   #uneven-length series
   x <- c(1, 2, 4, 1, 2, 3, 5, 2, 3, 5, 6, 7, 8, 4, 3, 6, 3, 2, 5)
-  expect_equal(unname(cbind(x, x)), idct2(dct2(cbind(x, x))))
+  expect_equal(cbind(x, x), idct2(dct2(cbind(x, x))))
   
 })
 
@@ -318,3 +318,25 @@ test_that("fwht() and ifwht() tests are correct", {
   expect_equal(ifwht(fwht(x, ordering = "dyadic"), ordering = "dyadic"), x)
 })
 
+# -----------------------------------------------------------------------
+# hilbert()
+
+test_that("parameters to hilbert() are correct", {
+  expect_error(hilbert())
+  expect_error(hilbert('a'))
+  expect_warning(hilbert(1 + 1i))
+  expect_error(hilbert(1, 'a'))
+  expect_error(hilbert(1, -1))
+})
+
+test_that("hilbert() tests are correct", {
+  x <- 1:4
+  i <- c(1, -1, -1, 1)
+  expect_equal(Re(hilbert(x)), x)
+  expect_equal(Im(hilbert(x)), i)
+  
+  # test with small numbers (Github bug #4)
+  expect_equal(Re(hilbert(1e-12 * x)), 1e-12 * x)
+  expect_equal(Im(hilbert(1e-12 * x)), 1e-12 * i)
+  
+})

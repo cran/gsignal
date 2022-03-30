@@ -22,6 +22,8 @@
 # 20200217  GvB       setup for gsignal v0.1
 # 20200413  GvB       added S3 method method for Sos
 # 20210402  GvB       use padding and Gustafsson method for initial conditions
+# 20210712  GvB       copy attributes of input x to output y
+# 20220330  GvB       corrected bug in nfact (default and Sos)
 #------------------------------------------------------------------------------
 
 #' Zero-phase digital filtering
@@ -36,11 +38,11 @@
 #'
 #' Before filtering the input signal is extended with a reflected part of both
 #' ends of the signal. The length of this extension is 3 times the filter order.
-#' Gustafsson's [1] method is then used to specify the initial conditions used
+#' The Gustafsson [1] method is then used to specify the initial conditions used
 #' to further handle the edges of the signal.
 #'
 #' @param filt For the default case, the moving-average coefficients of an ARMA
-#'   filter (normally called ‘b’). Generically, \code{filt} specifies an
+#'   filter (normally called \code{b}). Generically, \code{filt} specifies an
 #'   arbitrary filter operation.
 #' @param a the autoregressive (recursive) coefficients of an ARMA filter,
 #'   specified as a vector. If \code{a[1]} is not equal to 1, then filter
@@ -104,6 +106,9 @@ filtfilt.default <- function(filt, a, x, ...) {
     zi <- NULL
   }
 
+  #save attributes of x
+  atx <- attributes(x)
+  
   if (is.vector(x)) {
     x <- as.matrix(x, ncol = 1)
     vec <- TRUE
@@ -112,7 +117,9 @@ filtfilt.default <- function(filt, a, x, ...) {
   }
   nrx <- nrow(x)
   ncx <- ncol(x)
-  nfact <- min(nfact - 1, nrx)
+  # nfact <- min(nfact - 1, nrx)
+  # corrected bug 20220328
+  nfact <- min(nfact - 1, nrx - 1)
 
   y <- matrix(0, nrx, ncx)
 
@@ -136,6 +143,8 @@ filtfilt.default <- function(filt, a, x, ...) {
   if (vec) {
     y <- as.vector(y)
   }
+  # set attributes of y nd return
+  attributes(y) <- atx
   y
 }
 
@@ -168,6 +177,9 @@ filtfilt.Sos <- function(filt, x, ...) { # Second-order sections
     zi <- NULL
   }
 
+  #save attributes of x
+  atx <- attributes(x)
+  
   if (is.vector(x)) {
     x <- as.matrix(x, ncol = 1)
     vec <- TRUE
@@ -176,8 +188,10 @@ filtfilt.Sos <- function(filt, x, ...) { # Second-order sections
   }
   nrx <- nrow(x)
   ncx <- ncol(x)
-  nfact <- min(nfact - 1, nrx)
-
+  # nfact <- min(nfact - 1, nrx)
+  # corrected bug 20220328
+  nfact <- min(nfact - 1, nrx - 1)
+  
   y <- matrix(0, nrx, ncx)
 
   for (icol in seq_len(ncx)) {
@@ -199,6 +213,8 @@ filtfilt.Sos <- function(filt, x, ...) { # Second-order sections
   if (vec) {
     y <- as.vector(y)
   }
+  # set attributes of y and return
+  attributes(y) <- atx
   y
 }
 

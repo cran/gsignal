@@ -5,10 +5,74 @@ library(testthat)
 tol <- 1e-6
 
 # -----------------------------------------------------------------------
+# filter()
+
+test_that("parameters to filter() are correct", {
+  expect_error(filter())
+  expect_error(filter(0, 0, 1:10))
+  expect_error(filter(1, 1, c('invalid', 'invalid')))
+})
+
+test_that("filter() tests are correct", {
+  expect_equal(filter(1, 1, 1:2), c(1,2))
+  expect_equal(filter(1, 2, 1:2), c(0.50, 1.00))
+  expect_equal(filter(2, 1, 1:2), c(2, 4))
+  x <- runif(100)
+  y <- filter(1, 1, x)
+  expect_equal(length(y), length(x))
+  x <- matrix(runif(200), 100, 2)
+  colnames(x) <- c("one", "two")
+  y <- filter(1, 1, x)
+  expect_equal(ncol(y), ncol(x))
+  expect_equal(nrow(y), nrow(x))
+  expect_equal(colnames(y), colnames(x))
+  
+  # Octave tests - shared a, b, x, r
+  a <- c(1, 1)
+  b <- c(1, 1)
+  x <- rep(0, 10); x[1] <- 1
+  expect_equal(filter(b, 1, x), c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(filter(1, a, x), c(+1, -1, +1, -1, +1, -1, +1, -1, +1, -1))
+  expect_equal(filter(b, a, x), x)
+  
+  # complex variables
+  r <- sqrt (1 / 2) * (1 + 1i)
+  expect_equal(filter(b, 1, r * x), r * c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(filter(1, b, r * x), r * c(+1, -1, +1, -1, +1, -1, +1, -1, +1, -1))
+  expect_equal(filter(b, a, r * x), r * x)
+  a <- a * r
+  b <- b * r
+  expect_equal(filter(b, 1, x), r * c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(filter(b, 1, r * x), r * r * c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(filter(b, a, x),  c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(filter(b, a, r * x), r * c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  
+  a <- c(1, 1)
+  b <- c(1, 1)
+  x <- rep(0, 10); x[1] <- 1
+  l <- filter(b, 1, x, -1)
+  expect_equal(l$y, c(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))
+  expect_equal(l$zf, 0)
+  
+  x  <- matrix(0, 10, 3); x[1, 1] <- -1;  x[1, 2] <- 1
+  y0 <- matrix(0, 10, 3); y0[1:2, 1] = -1;  y0[1:2, 2] = 1
+  y <- filter (b, 1, x)
+  expect_equal(y, y0)
+  
+  # Test using initial conditions
+  expect_equal(filter(c(1, 1, 1), c(1, 1), c(1, 2), c(1, 1))$y, c(2, 2))
+  expect_equal(filter(c(1, 3), 1, matrix(1:6, 3, byrow = TRUE), matrix(c(4, 5), 1))$y,
+               matrix(c(5, 6, 14, 7, 10, 18), 3))
+  expect_error(filter(c(1, 3), 1, matrix(1:6, 3, byrow = TRUE), c(4, 5)))
+  
+})
+
+# -----------------------------------------------------------------------
 # filtfilt()
 
 test_that("parameters to filtfilt() are correct", {
   expect_error(filtfilt())
+  expect_error(filtfile(0, 0))
   expect_error(filtfilt(0, 0, 1:10))
   expect_error(filtfilt(1, 2, array(1:8, c(2, 2, 2))))
   expect_error(filtfilt(1, 1, c('invalid', 'invalid')))
@@ -22,9 +86,14 @@ test_that("filtfilt() tests are correct", {
   y <- filtfilt(1, 1, x)
   expect_equal(length(y), length(x))
   x <- matrix(runif(200), 100, 2)
+  colnames(x) <- c("one", "two")
   y <- filtfilt(1, 1, x)
   expect_equal(ncol(y), ncol(x))
   expect_equal(nrow(y), nrow(x))
+  expect_equal(colnames(y), colnames(x))
+  # bug 20220328
+  expect_equal(filtfilt(1:4, 1:4, 1:10), 1:10)
+  
 })
 
 # -----------------------------------------------------------------------
@@ -142,6 +211,13 @@ test_that("sosfilt() tests are correct", {
   y <- sosfilt(sos,x)
   expect_equal(y, c(0, 1, 7, 26, 70, 155, 301, 532, 876, 1365))
 
+  # complex input
+  r <- sqrt (1 / 2) * (1 + 1i)
+  sos <- rbind(c(0,1,0,1,-1,0),c(1,2,1,1,-2,1))
+  x <- 1:10
+  y <- sosfilt(sos, r * x)
+  expect_equal(y, r * c(0, 1, 7, 26, 70, 155, 301, 532, 876, 1365))
+  
   # initial conditions  
   sos <- rbind(c(0,1,0,1,-1,0), c(1,2,1,1,-2,1))
   x1 <- 1:10
@@ -159,10 +235,15 @@ test_that("sosfilt() tests are correct", {
   # multidimensional
   sos <- rbind(c(0,1,0,1,-1,0), c(1,2,1,1,-2,1))
   x <- cbind(1:10, 11:20)
+  colnames(x) <- c("one", "two")
   y <- sosfilt(sos, x, "zf")
-  expect_equal(y$y, cbind(c(0,1,7,26,70,155,301,532,876,1365),
-                          c(0,11,67,216,510,1005,1761,2842,4316,6255)))
+  expect_equal(y$y, cbind(one = c(0,1,7,26,70,155,301,532,876,1365),
+                          two = c(0,11,67,216,510,1005,1761,2842,4316,6255)))
   expect_equal(y$zf, array(c(55,1980,0,-1320,155,8580,0,-6120), c(2,2,2)))
+  expect_equal(colnames(y$y), colnames(x))
+  
+  # complex input
+  
 })
 
 # -----------------------------------------------------------------------
@@ -215,6 +296,18 @@ test_that("fftfilt() tests are correct", {
   y0 <- filter(b, 1, x)
   y  <- fftfilt(b, x)
   expect_equal(y0, y, tolerance =  tol)
+  
+  # Github Issue #3
+  b  <- c(1, 1)
+  x  <- matrix(rep(0L, 30), 10, 3); x[1, 1] <--1; x[1, 2] <- 1
+  # y0 <- matrix(rep(0L, 30), 10, 3); y0[1:2, 1] <- -1; y0[1:2, 2] <- 1
+  # y  <- fftfilt(b, x, n = 10)
+  # expect_equal(y0, y)
+  y <- matrix(rep(0L, 30), 10, 3); y[1:2, 1] <- -1; y[1:2, 2] <- 1
+  colnames(x) <- colnames(y) <- c("one", "two", "three")
+  expect_equal(fftfilt(b, x, n = 10), y)
+  expect_equal(colnames(fftfilt(b, x, n = 10)), colnames(y))
+  expect_equal(fftfilt(b, x[, 1], n = 10), y[, 1])
   
 })
 

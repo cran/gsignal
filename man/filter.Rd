@@ -26,18 +26,18 @@ filter(filt, ...)
 }
 \arguments{
 \item{filt}{For the default case, the moving-average coefficients of an ARMA
-filter (normally called ‘b’), specified as a vector. Generically,
-\code{filt} specifies an arbitrary filter operation.}
+filter (normally called \code{b}), specified as a numeric or complex
+vector. Generically, \code{filt} specifies an arbitrary filter operation.}
 
 \item{...}{additional arguments (ignored).}
 
 \item{a}{the autoregressive (recursive) coefficients of an ARMA filter,
-specified as a vector. If \code{a[1]} is not equal to 1, then filter
-normalizes the filter coefficients by \code{a[1]}. Therefore, \code{a[1]}
-must be nonzero.}
+specified as a numeric or complex vector. If \code{a[1]} is not equal to 1,
+then filter normalizes the filter coefficients by \code{a[1]}. Therefore,
+\code{a[1]} must be nonzero.}
 
-\item{x}{the input signal to be filtered, specified as a vector or as a
-matrix. If \code{x} is a matrix, each column is filtered.}
+\item{x}{the input signal to be filtered, specified as a numeric or complex
+vector or matrix. If \code{x} is a matrix, each column is filtered.}
 
 \item{zi}{If \code{zi} is provided, it is taken as the initial state of the
 system and the final state is returned as zf. The state vector is a vector

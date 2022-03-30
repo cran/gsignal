@@ -20,6 +20,9 @@
 # 20200417  GvB       setup for gsignal v0.1.0
 # 20200420  GvB       adapted slightly (rounding in case of whole numbers)
 # 20201121  GvB       done away with FFTfilt, only method for Ma()
+# 20210630  GvB       fixed Github bug #3: Problems with fftfilt when FFT
+#                     length is provided by user
+# 20210712  GvB       copy attributes of input x to output y
 #------------------------------------------------------------------------------
 
 #' FFT-based FIR filtering
@@ -108,6 +111,9 @@ fftfilt.default <- function(b, x, n = NULL) {
   } else {
     lb <- length(b)
   }
+  
+  #save attributes of x
+  atx <- attributes(x)
 
   if (is.vector(x)) {
     lx <- length(x)
@@ -141,9 +147,10 @@ fftfilt.default <- function(b, x, n = NULL) {
     if (is.vector(x)) {
       R <- ceiling(lx / L)
       y <- rep(0L, lx)
+      B <- stats::fft(postpad(b, n))
       for (r in seq_len(R)) {
         lo <- (r - 1) * L + 1
-        hi <- min(r * L, nrx)
+        hi <- min(r * L, lx)
         tmp <- rep(0L, n)
         tmp[1:(hi - lo + 1)] <- x[lo:hi]
         tmp <- ifft(stats::fft(postpad(tmp, n)) * B)
@@ -153,6 +160,7 @@ fftfilt.default <- function(b, x, n = NULL) {
     } else {
       R <- ceiling(nrx / L)
       y <- matrix(0L, nrx, ncx)
+      B <- stats::fft(postpad(b, n))
       for (r in seq_len(R)) {
         lo <- (r - 1) * L + 1
         hi <- min(r * L, nrx)
@@ -179,6 +187,8 @@ fftfilt.default <- function(b, x, n = NULL) {
     idx <- !any(as.logical(x - round(x)))
     y[idx] <- round(y[idx])
   }
+  # set attributes of y nd return
+  attributes(y) <- atx
   y
 }
 
