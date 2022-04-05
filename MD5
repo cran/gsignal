@@ -1,7 +1,7 @@
 5b4473596678d62d9d83096273422c8c *COPYING
-289933bb88e2b804e24fa1d565d26c20 *DESCRIPTION
+ea53a3358452feb2b0c5e7a22f53093d *DESCRIPTION
 cc6cb3d0a2202a6b5e0bf501f743434b *NAMESPACE
-42aa9a30f6c9097253a3e895939f9d77 *NEWS.md
+e428950bf330d78881aea85c3c5eec94 *NEWS.md
 b5075f65c4b3165847b284534ab12c15 *R/Arma.R
 8e5216c00ea812b9b959d3b0493fb105 *R/FilterSpecs.R
 3f5297ff2da7e318f7cfdf404750339e *R/Ma.R
@@ -70,7 +70,7 @@ d1ab0e10881e317e44322dab6785bda5 *R/filter2.R
 3baa1e4f0665319446893e7918944861 *R/filter_zi.R
 76a8fc09a760d953b81fc9093d74f3ed *R/filtfilt.R
 2d5772bbf1df00ec59b1c6d65688d62a *R/filtic.R
-bba5f0939f86df65a4ba724b00beb8b1 *R/findpeaks.R
+305a18a0e72ffb1168955c6d268eccbb *R/findpeaks.R
 9fd4f575cf0528173cf01501a5625c10 *R/fir1.R
 a58909002fb999185c1f6578cd55bd82 *R/fir2.R
 9f229d27b3bf0be70bb2ac3e403ba7a3 *R/firls.R
@@ -183,15 +183,15 @@ a1a6cb4cf6312d311559c8df540f9297 *R/upsamplefill.R
 96f002ad31c61197ffb1d6bc99f2f4e8 *R/zp2sos.R
 c46d587843af6075dc3582cf7c785a6a *R/zp2tf.R
 1cc6c0d5a1ad4b161f29cb170c7a082a *R/zplane.R
-f4a048758143c7d0ff0694f4d5042095 *README.md
-d59709c04b06215196f63282355d197f *build/partial.rdb
+2bbfdcbe84595bb60e6b7d752c4b98ad *README.md
+5a3dc3beb5dbceb483e1c2b46e240791 *build/partial.rdb
 a45053a2cb29d1f8b6204dec527294d3 *build/vignette.rds
 e7193755ef523e165f889e21c38ae8ba *data/signals.rda
 6b780f311e6cc928ca5141be803e2f04 *inst/CITATION
 7fa0d1b6ccb27bb5377531f5bdc499d3 *inst/COPYRIGHTS
 dc816d5448bad62ea8caba5ac48bbc20 *inst/doc/gsignal.R
 c958fa6b3f4fb6c005dd3bfec168b9d0 *inst/doc/gsignal.Rmd
-2e2b44e4d9324481c1c2682de088ca56 *inst/doc/gsignal.html
+a33e27fff31779d353ef91c796e227af *inst/doc/gsignal.html
 6269bb074ba01ea484690fe98e458266 *man/Arma.Rd
 f1451339db6593b86b8205d8f4004c4b *man/FilterSpecs.Rd
 9dbee4537f6944c063ff2a3db9f93a13 *man/Ma.Rd
@@ -385,7 +385,7 @@ cce1efebd219f942deb39e6a6bd04515 *tests/testthat/test_FIR_Filter_Design_Function
 a9f6300776d801f0b665b6e5acc731cc *tests/testthat/test_Filter_Conversion_Functions.R
 d1344639f1af486978efbafa2ac788d1 *tests/testthat/test_Filtering_Functions.R
 e05185dc51f0e6ebd7dd87bc5ec3d622 *tests/testthat/test_IIR_Filter_Design_Functions.R
-f0e28ca8a31c48e4bc155e5fd0a261a0 *tests/testthat/test_Miscellaneous_Functions.R
+e3f9445f2c5b8e8e3a3e63816b50e239 *tests/testthat/test_Miscellaneous_Functions.R
 2a13810f06d8f264146d43fe0117bb89 *tests/testthat/test_Power_Spectrum_Analysis_Functions.R
 6debaa4c8f3c0fc2cdb191d8d0bbd39d *tests/testthat/test_Sample_Rate_Change_Functions.R
 1cd51ce9c5e1772627d6da2bb7a76822 *tests/testthat/test_Signal_Measurement.R
