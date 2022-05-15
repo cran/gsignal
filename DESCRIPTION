@@ -1,8 +1,8 @@
 Package: gsignal
 Type: Package
 Title: Signal Processing
-Version: 0.3-4
-Date: 2022-04-04
+Version: 0.3-5
+Date: 2022-05-14
 Authors@R: 
     c(person("Geert", "van Boxtel", role = c("aut", "cre"),
              email = "G.J.M.vanBoxtel@gmail.com",
@@ -79,12 +79,12 @@ Language: en-US
 URL: https://github.com/gjmvanboxtel/gsignal
 BugReports: https://github.com/gjmvanboxtel/gsignal/issues
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: knitr, rmarkdown, testthat, ggplot2, gridExtra,
-        microbenchmark, imager
+        microbenchmark, imager, covr
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2022-04-04 14:39:40 UTC; geert
+Packaged: 2022-05-15 11:20:53 UTC; geert
 Author: Geert van Boxtel [aut, cre] (Maintainer),
   Tom Short [aut] (Author of 'signal' package),
   Paul Kienzle [aut] (Majority of the original sources),
@@ -143,4 +143,4 @@ Author: Geert van Boxtel [aut, cre] (Maintainer),
   Andreas Weingessel [ctb]
 Maintainer: Geert van Boxtel <G.J.M.vanBoxtel@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-04-05 07:50:02 UTC
+Date/Publication: 2022-05-15 11:40:02 UTC
