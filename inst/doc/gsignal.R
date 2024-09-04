@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -129,6 +129,7 @@ freqz(h, fs = fs)
 
 
 ## ----FIR_delay, fig.height=7, fig.width=7-------------------------------------
+
 op <- par(mfrow = c(2, 1))
 # design the filter
 fs = 256
@@ -141,22 +142,23 @@ plot(gd, ylim = c(0, 40),
                   "(here 40 / 2 = 20)"))
 
 # filter electrocardiogram data with added noise
-data(signals)
+data(signals, package = "gsignal")
 npts <- nrow(signals)
 ecg <- signals$ecg + 1000 * runif(npts)
 time <- seq(0, 10, length.out = npts)
 plot(time, ecg, type = "l", main = "(b) Example ECG signal",
      xlab = "Time", ylab = "", xlim = c(0,2))
 title(ylab = expression(paste("Amplitude (", mu, "V)")), line = 2)
-f1 <- filter(h, ecg)
+f1 <- gsignal::filter(h, ecg)
 lines(time, f1, col = "red", lwd = 2)
 delay <- mean(gd$gd)
-f2 <- c(f1[(delay + 1):npts], rep(NA, delay + 1))
+f2 <- c(f1[(delay + 1):npts], rep(NA, delay))
 lines(time, f2, col = "blue", lwd = 2)
 legend("topright", legend = c("Original", "Filtered", "Corrected"),
        lty = 1, lwd = c(1, 2, 2), col = c("black", "red", "blue"))
 
 par(op)
+
 
 ## ----iir, fig.height=7, fig.width=7-------------------------------------------
 

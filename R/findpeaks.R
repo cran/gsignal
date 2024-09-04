@@ -19,6 +19,7 @@
 # Version history
 # 20200105  GvB       setup for gsignal v0.1.0
 # 20220511  GvB       use inherits() instead of direct comparison of class name
+# 20240708  GvB       pull request #19 from jefferis: line 174 changed 
 #------------------------------------------------------------------------------
 
 #' Find local extrema
@@ -170,7 +171,7 @@ findpeaks <- function(data,
   D <- with(expand.grid(A = idx_s, B = t(idx_s)), abs(A - B))
   dim(D) <- c(length(idx_s), length(idx_s))
   diag(D) <- NA                     # eliminate diagonal comparison
-  if (any(D) < MinPeakDistance) {
+  if (isTRUE(any(D < MinPeakDistance))) {
     i <- 1
     node2visit <- seq_along(idx_s)
     visited <- NULL

@@ -24,6 +24,8 @@
 # 20210402  GvB       use padding and Gustafsson method for initial conditions
 # 20210712  GvB       copy attributes of input x to output y
 # 20220330  GvB       corrected bug in nfact (default and Sos)
+# 20221222  GvB       merged pull request from Rafael Laboissière
+#                     Negate the signal reversed in time at both ends
 #------------------------------------------------------------------------------
 
 #' Zero-phase digital filtering
@@ -125,8 +127,8 @@ filtfilt.default <- function(filt, a, x, ...) {
 
   for (icol in seq_len(ncx)) {
     if (nfact > 0) {
-      temp <- c(x[seq(nfact + 1, 2, -1), icol], x[, icol],
-                x[seq(nrx - 1, nrx - nfact, -1), icol])
+      temp <- c(2 * x[1, icol] - x[seq(nfact + 1, 2, -1), icol], x[, icol],
+                2 * x[nrx, icol] - x[seq(nrx - 1, nrx - nfact, -1), icol])
       temp <- filter(filt, a, temp, zi * temp[1])$y
       temp <- rev(temp)
       temp <- rev(filter(filt, a, temp, zi * temp[1])$y)

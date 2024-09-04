@@ -19,6 +19,8 @@
 # Version history
 # 20201206  GvB       setup for gsignal v0.1.0
 # 20210411  GvB       v0.3.0 bugfix in output time points
+# 20221103  GvB       correct typos in stft.R
+#                     (H. Dieter Wilhelm - Pull request #10)
 #------------------------------------------------------------------------------
 
 #' Short-Term Fourier Transform
@@ -32,11 +34,11 @@
 #'    as \code{window} and is multiplied by \code{window} before (optional)
 #'    zero-padding and calculation of its periodogram. If \code{window} is a
 #'    scalar, each segment has a length of \code{window} and a Hamming window is
-#'    used. Default: \code{nextpow2(sqrt(length(x)))} (the square root of the
+#'    used. Default: \code{nextpow2(sqrt(NROW(x)))} (the square root of the
 #'    length of \code{x} rounded up to the next power of two). The window length
 #'    must be larger than 3.
 #' @param overlap segment overlap, specified as a numeric value expressed as a
-#'   multiple of window or segment length. 0 <= overlap < 1. Default: 0.5.
+#'   multiple of window or segment length. 0 <= overlap < 1. Default: 0.75.
 #' @param nfft Length of FFT, specified as an integer scalar. The default is the
 #'   length of the \code{window} vector or has the same value as the scalar
 #'   \code{window} argument.  If \code{nfft} is larger than the segment length,
