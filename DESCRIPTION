@@ -1,8 +1,8 @@
 Package: gsignal
 Type: Package
 Title: Signal Processing
-Version: 0.3-6
-Date: 2024-09-04
+Version: 0.3-7
+Date: 2024-09-11
 Authors@R: 
     c(person("Geert", "van Boxtel", role = c("aut", "cre"),
              email = "G.J.M.vanBoxtel@gmail.com",
@@ -84,7 +84,7 @@ Suggests: knitr, rmarkdown, testthat, ggplot2, gridExtra,
         microbenchmark, covr
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-09-04 14:49:46 UTC; geert
+Packaged: 2024-09-11 12:27:07 UTC; geert
 Author: Geert van Boxtel [aut, cre] (Maintainer),
   Tom Short [aut] (Author of 'signal' package),
   Paul Kienzle [aut] (Majority of the original sources),
@@ -143,4 +143,4 @@ Author: Geert van Boxtel [aut, cre] (Maintainer),
   Andreas Weingessel [ctb]
 Maintainer: Geert van Boxtel <G.J.M.vanBoxtel@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-09-04 22:30:02 UTC
+Date/Publication: 2024-09-11 22:52:47 UTC

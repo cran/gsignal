@@ -1,7 +1,7 @@
 5b4473596678d62d9d83096273422c8c *COPYING
-f09495ffbbc90f02daec8a91c9b37931 *DESCRIPTION
+1a25257934c020ddd86bc6f2a93ba287 *DESCRIPTION
 7480ef5651f13acc24786b25612ad28b *NAMESPACE
-ffd81d50de7f9563da278796d31ef1dc *NEWS.md
+d3b67e06b36bea96ca8607494d73050c *NEWS.md
 b5075f65c4b3165847b284534ab12c15 *R/Arma.R
 8e5216c00ea812b9b959d3b0493fb105 *R/FilterSpecs.R
 3f5297ff2da7e318f7cfdf404750339e *R/Ma.R
@@ -70,7 +70,7 @@ d1ab0e10881e317e44322dab6785bda5 *R/filter2.R
 ca27b2777cc14d4f5f37775799c09283 *R/filter_zi.R
 efd756c2ebd4a4d4a5bad1cd2a7470d6 *R/filtfilt.R
 2d5772bbf1df00ec59b1c6d65688d62a *R/filtic.R
-89cab8d50e4c1cc171c995a6764c3483 *R/findpeaks.R
+46046d9c988a5c074e7bc0ad49f8b793 *R/findpeaks.R
 4e724a12410a5d6f1c1adb9833330d64 *R/fir1.R
 a58909002fb999185c1f6578cd55bd82 *R/fir2.R
 78099e0ce02c17fc1d76a8bd303eca39 *R/firls.R
@@ -182,7 +182,7 @@ a1a6cb4cf6312d311559c8df540f9297 *R/upsamplefill.R
 96f002ad31c61197ffb1d6bc99f2f4e8 *R/zp2sos.R
 c46d587843af6075dc3582cf7c785a6a *R/zp2tf.R
 1cc6c0d5a1ad4b161f29cb170c7a082a *R/zplane.R
-6da89a1c706791f3b350058cc46397e5 *README.md
+35cb6ba75887cf29a887d50968e34fb1 *README.md
 aa5e5a2cbfaea3d9b6cdbe378ac48cee *build/partial.rdb
 148fe3348b6e4efca1c4fbd134411d80 *build/vignette.rds
 e7193755ef523e165f889e21c38ae8ba *data/signals.rda
@@ -190,7 +190,7 @@ bab6ee3b8b593cece7be9824b6cc7b9c *inst/CITATION
 7fa0d1b6ccb27bb5377531f5bdc499d3 *inst/COPYRIGHTS
 cbda6fd85a38872970304dae1c8c5712 *inst/doc/gsignal.R
 e14f3ef83493eabdff9d3e636e132a47 *inst/doc/gsignal.Rmd
-810309d73a0b62e5a1d088216eff2caa *inst/doc/gsignal.html
+9344c5738e6ce2d0a36b4699761b84d5 *inst/doc/gsignal.html
 6269bb074ba01ea484690fe98e458266 *man/Arma.Rd
 f1451339db6593b86b8205d8f4004c4b *man/FilterSpecs.Rd
 9dbee4537f6944c063ff2a3db9f93a13 *man/Ma.Rd
@@ -380,14 +380,14 @@ dc8666b6fba349e6fe2401132425d8b1 *src/upfirdn.cpp
 85ec9349733cbfd7121484a85b8d0b62 *tests/testthat/Rplots.pdf
 e85ce14dd7fb5392d8b90c50dbf75dbc *tests/testthat/test_Correlation_and_Convolution_Functions.R
 cce1efebd219f942deb39e6a6bd04515 *tests/testthat/test_FIR_Filter_Design_Functions.R
-e895e14b0be696f363be890216f2ceca *tests/testthat/test_Filter_Analysis_Functions.R
+5aecbc209777b0459e962bd0e8691f48 *tests/testthat/test_Filter_Analysis_Functions.R
 0fe52b03e3bc1d0331fb55b869cc66d4 *tests/testthat/test_Filter_Conversion_Functions.R
 d1344639f1af486978efbafa2ac788d1 *tests/testthat/test_Filtering_Functions.R
 b58e610f14e2af60adbd0c46065a423c *tests/testthat/test_IIR_Filter_Design_Functions.R
 e3f9445f2c5b8e8e3a3e63816b50e239 *tests/testthat/test_Miscellaneous_Functions.R
 2778148a4455a2196896d6b589253e42 *tests/testthat/test_Power_Spectrum_Analysis_Functions.R
 eee73ff4446968b95bcacc3c5134a9d5 *tests/testthat/test_Sample_Rate_Change_Functions.R
-1cd51ce9c5e1772627d6da2bb7a76822 *tests/testthat/test_Signal_Measurement.R
+a8b579e8d55f2bf5ae8a2af63f532515 *tests/testthat/test_Signal_Measurement.R
 179a171383bdfcd7edc8aef91bec20b9 *tests/testthat/test_Signals.R
 4383d9f7ed04fd57cf78ef7b30ab6f59 *tests/testthat/test_Standard_Functions.R
 9dd84d7d35b8938f27086cc33a13a779 *tests/testthat/test_System_Identification_Functions.R
@@ -395,5 +395,4 @@ c08839d2356cd747f15dd34d746389db *tests/testthat/test_Transforms_Functions.R
 e340b22a2f876e2408aa91f452d11850 *tests/testthat/test_Utility_Functions.R
 a09479df9edc1aeb1a3030e20df33f71 *tests/testthat/test_Window_Functions.R
 26006a349b39cc0eca6a4c5ff9c64ad0 *tests/testthat/test_gsignal-internal.R
-2a38a711bd9010bd397915f801785ba0 *tests/testthat/testthat-problems.rds
 e14f3ef83493eabdff9d3e636e132a47 *vignettes/gsignal.Rmd
